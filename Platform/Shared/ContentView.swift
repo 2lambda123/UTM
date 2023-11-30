@@ -22,6 +22,8 @@ import IQKeyboardManagerSwift
 
 #if WITH_QEMU_TCI
 let productName = "UTM SE"
+#elseif WITH_REMOTE
+let productName = "UTM Remote"
 #else
 let productName = "UTM"
 #endif
@@ -78,7 +80,7 @@ struct ContentView: View {
             #if !os(visionOS)
             IQKeyboardManager.shared.enable = true
             #endif
-            #if !WITH_QEMU_TCI
+            #if WITH_JIT
             if !Main.jitAvailable {
                 data.busyWorkAsync {
                     let jitStreamerAttach = UserDefaults.standard.bool(forKey: "JitStreamerAttach")
